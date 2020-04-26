@@ -7,9 +7,17 @@ namespace App\Model\Admin;
 use App\Model\BaseModel;
 use EasySwoole\ORM\Utility\Schema\Table;
 
-class AdminUser extends BaseModel
+/**
+ * Class AdminUser
+ * @package App\Model\Admin
+ * @property $adminId
+ * @property $account
+ * @property $password
+ * @property $session
+ */
+class User extends BaseModel
 {
-    protected $tableName = 'admin_user_list';
+    protected $tableName = 'admin_list';
 
     function schemaInfo(bool $isCache = true): Table
     {

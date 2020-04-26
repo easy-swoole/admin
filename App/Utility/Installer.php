@@ -4,7 +4,7 @@
 namespace App\Utility;
 
 
-use App\Model\Admin\AdminUser;
+use App\Model\Admin\User;
 use EasySwoole\EasySwoole\Config;
 use EasySwoole\ORM\DbManager;
 
@@ -12,7 +12,7 @@ class Installer
 {
     const INSTALL_FILE = EASYSWOOLE_ROOT.'/install.lock';
     const RELEASE_TABLE_MODEL = [
-        AdminUser::class,
+        User::class,
     ];
 
     public static function isInstall():bool
