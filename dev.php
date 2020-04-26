@@ -14,5 +14,12 @@ return [
         ]
     ],
     'TEMP_DIR' => null,
-    'LOG_DIR' => null
+    'LOG_DIR' => null,
+    "MYSQL"=>[
+        'host'     => 'rm-uf6ez54y779446i21fo.mysql.rds.aliyuncs.com',
+        'user'     => 'root',
+        'password' => 'gaobinzhanMysql0604',
+        'database' => 'easyswoole',
+        'charset'  => 'utf8mb4'
+    ]
 ];
