@@ -4,7 +4,7 @@
 namespace App\HttpController\Api\Admin;
 
 
-class Auth extends AbstractAdminBase
+class Auth extends AbstractBase
 {
     protected $noneAuthAction = [
         'login'

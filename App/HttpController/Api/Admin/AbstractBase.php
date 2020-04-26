@@ -8,7 +8,7 @@ use App\HttpController\Api\ApiBase;
 use App\Model\Admin\User;
 use EasySwoole\Http\Message\Status;
 
-abstract class AbstractAdminBase extends ApiBase
+abstract class AbstractBase extends ApiBase
 {
     protected $noneAuthAction = [];
     protected $who;
