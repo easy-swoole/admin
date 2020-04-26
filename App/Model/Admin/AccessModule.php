@@ -10,7 +10,10 @@ use EasySwoole\ORM\Utility\Schema\Table;
 /**
  * Class AccessModule
  * @package App\Model\Admin
- * acl
+ * @property $accessId
+ * @property $adminId
+ * @property $moduleId
+ * @property $accessHash
  */
 class AccessModule extends BaseModel
 {

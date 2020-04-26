@@ -5,6 +5,7 @@ namespace App\HttpController\Api\Admin;
 
 
 use App\HttpController\Api\ApiBase;
+use App\Model\Admin\AccessModule;
 use App\Model\Admin\User;
 use EasySwoole\Http\Message\Status;
 
@@ -14,6 +15,7 @@ abstract class AbstractBase extends ApiBase
     protected $who;
     protected $acl;
 
+    const ADMIN_COOKIE_NAME = 'admin_session';
 
     abstract protected function moduleName():string ;
 
@@ -45,7 +47,13 @@ abstract class AbstractBase extends ApiBase
     protected function who():?User
     {
         if(!$this->who){
-            //调用数据库查询
+            $cookie = $this->request()->getCookieParams(static::ADMIN_COOKIE_NAME);
+            if(empty($cookie)){
+                $cookie = $this->request()->getRequestParam(static::ADMIN_COOKIE_NAME);
+            }
+            if($cookie){
+                $this->who = User::create()->where(['session'=>$cookie])->get();
+            }
         }
         return $this->who;
     }
@@ -53,9 +61,8 @@ abstract class AbstractBase extends ApiBase
 
     protected function adminAcl():?array
     {
-        if(!empty($this->acl)){
-            //调用数据库查询
-        }
+        //这边需要关联Module表
+        $ret = AccessModule::create()->where('adminId',$this->who()->adminId)->all();
         return $this->acl;
     }
 }
