@@ -15,6 +15,10 @@ class AdminUser extends BaseModel
     {
         $table = new Table($this->tableName);
         $table->colInt('adminId')->setIsAutoIncrement()->setIsPrimaryKey();
+        $table->colVarChar('account',18)->setIsUnique()->setIsNotNull();
+        $table->colVarChar('password',32);
+        $table->colVarChar('session',32)->setIsUnique();
+        $table->setIfNotExists();
         return $table;
     }
 }
