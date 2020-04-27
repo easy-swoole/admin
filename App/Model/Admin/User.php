@@ -23,10 +23,27 @@ class User extends BaseModel
     {
         $table = new Table($this->tableName);
         $table->colInt('adminId')->setIsAutoIncrement()->setIsPrimaryKey();
-        $table->colVarChar('account',18)->setIsUnique()->setIsNotNull();
-        $table->colVarChar('password',32);
-        $table->colVarChar('session',32)->setIsUnique();
+        $table->colVarChar('account', 18)->setIsUnique()->setIsNotNull();
+        $table->colVarChar('password', 32);
+        $table->colVarChar('session', 32)->setIsUnique();
         $table->setIfNotExists();
         return $table;
+    }
+
+    public function check_password($account, $password) //: bool
+    {
+        $res = $this->where("account", $account)->get();
+        $password_sql = $res->password;
+        $admin_id = $res->adminId;
+        
+        if (md5($password) == $password_sql) {
+
+            return $admin_id;
+
+        } else {
+
+            return null;
+
+        }
     }
 }
