@@ -21,6 +21,7 @@ class Auth extends AbstractBase
     public function register()
     {
         $params = $this->paramsValidate(new UserValidate);
+        if ($params === false) return false;
         $userModel = new User();
 
         $userInfo = $userModel->get(['account' => $params['account']]);
