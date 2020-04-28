@@ -3,6 +3,8 @@
 
 namespace App\HttpController\Api\Admin;
 
+use App\Model\Admin\User;
+use App\Validate\Admin\UserValidate;
 use EasySwoole\Http\Message\Status;
 
 class Auth extends AbstractBase
@@ -14,6 +16,21 @@ class Auth extends AbstractBase
     protected function moduleName(): string
     {
         return 'auth';
+    }
+
+    public function register()
+    {
+        $params = $this->paramsValidate(new UserValidate);
+        $userModel = new User();
+
+        $userInfo = $userModel->get(['account' => $params['account']]);
+        if ($userInfo) return $this->error('帐号已存在');
+
+        $userModel->account = $params['account'];
+        $userModel->password = md5($params['password']);
+        if (!$userModel->save()) return $this->error('帐号注册失败');
+
+        return $this->success([], '帐号注册成功');
     }
 
     public function login()
