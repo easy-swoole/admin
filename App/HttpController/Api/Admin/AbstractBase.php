@@ -8,6 +8,7 @@ use App\HttpController\Api\ApiBase;
 use App\Model\Admin\AccessModule;
 use App\Model\Admin\User;
 use EasySwoole\Http\Message\Status;
+use EasySwoole\HttpAnnotation\Exception\Annotation\ParamValidateError;
 
 abstract class AbstractBase extends ApiBase
 {
@@ -43,6 +44,14 @@ abstract class AbstractBase extends ApiBase
         return true;
     }
 
+    protected function onException(\Throwable $throwable): void
+    {
+        if ($throwable instanceof ParamValidateError) {
+            $this->error($throwable->getValidate()->getError()->__toString());
+        } else {
+            $this->error($throwable->getMessage());
+        }
+    }
 
     protected function who():?User
     {
