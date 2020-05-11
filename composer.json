@@ -2,7 +2,8 @@
     "require": {
         "easyswoole/easyswoole": "3.x",
         "easyswoole/orm": "^1.4",
-        "easyswoole/http-annotation": "^1.1"
+        "easyswoole/http-annotation": "^1.1",
+        "easyswoole/tracker": "^1.1"
     },
     "autoload": {
         "psr-4": {

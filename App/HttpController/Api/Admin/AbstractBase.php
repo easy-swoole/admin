@@ -9,6 +9,7 @@ use App\Model\Admin\AccessModule;
 use App\Model\Admin\User;
 use EasySwoole\Http\Message\Status;
 use EasySwoole\HttpAnnotation\Exception\Annotation\ParamValidateError;
+use EasySwoole\Tracker\PointContext;
 
 abstract class AbstractBase extends ApiBase
 {
@@ -22,16 +23,19 @@ abstract class AbstractBase extends ApiBase
 
     protected function onRequest(?string $action): ?bool
     {
+        $point = PointContext::getInstance()->current()->appendChild("AdminApi-{$this->moduleName()}@OnRequest");
         //控制器为pool模式，强制重置，
         $this->who = null;
         $this->acl = null;
         if(in_array($action,$this->noneAuthAction)){
+            $point->end();
             return true;
         }
         if(!$this->who()){
             $this->writeJson(Status::CODE_UNAUTHORIZED,[
                 'errorCode'=>-2
             ],'请重新登录');
+            $point->end();
             return false;
         }
         $acl = $this->adminAcl();
@@ -39,9 +43,22 @@ abstract class AbstractBase extends ApiBase
             $this->writeJson(Status::CODE_UNAUTHORIZED,[
                 'errorCode'=>-1
             ],'权限不足');
+            $point->end();
             return false;
         }
+        $point->end();
+        $point->next("AdminApi-{$this->moduleName()}@$action");
         return true;
+    }
+
+    protected function afterAction(?string $actionName): void
+    {
+        $p = PointContext::getInstance()->find("AdminApi-{$this->moduleName()}@$actionName");
+        if($p){
+            $p->end();
+        }
+        parent::afterAction($actionName);
+
     }
 
     protected function onException(\Throwable $throwable): void

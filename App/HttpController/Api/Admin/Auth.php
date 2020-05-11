@@ -4,7 +4,6 @@
 namespace App\HttpController\Api\Admin;
 
 use App\Model\Admin\User;
-use EasySwoole\Http\Message\Status;
 use EasySwoole\HttpAnnotation\AnnotationTag\Method;
 use EasySwoole\HttpAnnotation\AnnotationTag\Param;
 
