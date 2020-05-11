@@ -10,4 +10,9 @@ class Index extends Base
     {
         $this->display('login.html');
     }
+
+    function index()
+    {
+        $this->display('index.html');
+    }
 }

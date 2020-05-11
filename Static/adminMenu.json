@@ -1,0 +1,39 @@
+{
+  "code": 200,
+  "result": {
+    "account": "admin",
+    "menu": [{
+      "name": "系统设置",
+      "href": "_blank5.html",
+      "list": []
+    },
+      {
+        "name": "测试",
+        "href": "_blank.html",
+        "list": []
+      },
+      {
+        "name": "用户管理",
+        "href": "",
+        "list": [{
+          "title": "资讯管理1",
+          "href": "_blank.html"
+        }, {
+          "title": "资讯管理2",
+          "href": "_blank2.html"
+        }]
+      },
+      {
+        "name": "系统设置",
+        "href": "",
+        "list": [{
+          "title": "资讯管理3",
+          "href": "_blank3.html"
+        }, {
+          "title": "资讯管理4",
+          "href": "_blank4.html"
+        }]
+      }
+    ]
+  }
+}
