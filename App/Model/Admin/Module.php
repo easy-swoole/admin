@@ -19,9 +19,11 @@ class Module extends BaseModel
     function schemaInfo(bool $isCache = true): Table
     {
         $table = new Table($this->tableName);
-        $table->colVarChar('module',45)->setIsUnique()->setIsNotNull()->setIsPrimaryKey();
-        $table->colVarChar('name',45)->setDefaultValue('模块名称');
-        $table->colVarChar('note',255)->setDefaultValue('模块备注');
+        $table->colVarChar('moduleId',10)->setIsAutoIncrement()->setIsPrimaryKey();
+        $table->colVarChar('moduleName',45)->setColumnComment('模块名称');
+        $table->colVarChar('moduleAction',45)->setColumnComment('模块名称');
+        $table->colVarChar('note',255)->setColumnComment('模块备注');
+        $table->colVarChar('moduleHash',45)->setIsNotNull()->setIsUnique();
         $table->setIfNotExists();
         return $table;
     }
