@@ -34,7 +34,12 @@
 <script src="/Vendor/AdminUI/adminUI.js"></script>
 <script src="/Js/admin.js"></script>
 <script>
-    AdminUI.init();
+    AdminUI.init(function () {
+        $("#login-btn").on('click',function () {
+
+        });
+    });
+
 </script>
 </body>
 </html>
