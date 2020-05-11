@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
     <title>管理后台</title>
 </head>
 <body>
@@ -20,21 +21,22 @@
 <!--左边菜单栏-->
 <aside id="left-menu" class="left-aside c-fff"></aside>
 <section class="right-content">
-<!--右侧头部导航-->
-<div class="nav-right-content-top">
-    <div id="left-move" class="tabnav-box tabnav-box-icon"></div>
-    <div class="iframe-nav-box">
-        <div class="tabnav-box welcome-home border-left-0 b-fff b-f6"><img src="/Images/Icon/home.png"/> </div>
-    </div>
-    <div  id="right-move" class="tabnav-box tabnav-box-icon right-40 border-right-0"></div>
-    <div id="close-menu" class="tabnav-box tabnav-box-icon right-0 close-menu-icon">
-        <div class="close-menu">
-            <div id="close-now">关闭当前</div>
-            <div id="close-all">关闭所有</div>
+    <!--右侧头部导航-->
+    <div class="nav-right-content-top">
+        <div id="left-move" class="tabnav-box tabnav-box-icon"></div>
+        <div class="iframe-nav-box">
+            <div class="tabnav-box welcome-home border-left-0 b-fff b-f6"><img
+                    src="/Vendor/AdminUI/Images/Icon/home.png"/></div>
+        </div>
+        <div id="right-move" class="tabnav-box tabnav-box-icon right-40 border-right-0"></div>
+        <div id="close-menu" class="tabnav-box tabnav-box-icon right-0 close-menu-icon">
+            <div class="close-menu">
+                <div id="close-now">关闭当前</div>
+                <div id="close-all">关闭所有</div>
+            </div>
         </div>
     </div>
-</div>
-<!--右侧底部内容-->
+    <!--右侧底部内容-->
     <div class="iframe-box">
         <iframe id="welcomePage"></iframe>
     </div>
@@ -42,9 +44,9 @@
 <script src="/Vendor/AdminUI/adminUI.js"></script>
 <script src="/Js/admin.js"></script>
 <script>
-AdminUI.init(function () {
-    AdminUI.buildFrame('/adminMenu.json');
-});
+    AdminUI.init(function () {
+        AdminUI.buildFrame('/adminMenu.json');
+    });
 </script>
 </body>
 </html>
