@@ -10,34 +10,36 @@ AdminUI.isEmpty = function (obj) {
     }
 };
 
-AdminUI.libType = {
+AdminUI.jQueryPath = 'https://cdn.bootcdn.net/ajax/libs/jquery/3.5.0/jquery.min.js';
+
+AdminUI.resourceType = {
     js: 1,
-    css: 3
+    css: 2
 };
 
-AdminUI.libPath = './resource/';
+
 AdminUI.welcomePage = './welcome.html';
 
-AdminUI.lib = [
-    {"url": "css/common.css", "type": AdminUI.libType.css},
-    {"url": "js/jquery-3.5.0.min.js", "type": AdminUI.libType.js}
+AdminUI.uiResource = [
+    {url: AdminUI.jQueryPath , type:AdminUI.resourceType.js},
+    {url: "/Css/common.css", type: AdminUI.resourceType.css}
 ];
 
 AdminUI.loadResource = function (file, type, callback) {
     let element;
     let fn = callback || function () {
     };
-    if (type == AdminUI.libType.css) {
+    if (type == AdminUI.resourceType.css) {
         element = document.createElement('link');
         element.setAttribute("rel", "stylesheet");
         element.setAttribute("type", "text/css");
         element.setAttribute("href", file);
-    } else if (type == AdminUI.libType.js) {
+    } else if (type == AdminUI.resourceType.js) {
         element = document.createElement('script');
         element.type = 'text/javascript';
         element.src = file;
     }
-    if (type != AdminUI.libType.css) {
+    if (type != AdminUI.resourceType.css) {
         if (element.readyState) {
             //IE
             element.onreadystatechange = function () {
@@ -56,21 +58,21 @@ AdminUI.loadResource = function (file, type, callback) {
     document.getElementsByTagName('head')[0].appendChild(element);
 };
 
-AdminUI.loadLib = function (callback) {
+AdminUI.init = function (callback) {
     let fn = callback || function () {
     };
     let loadCount = 0;
-    for (var i in this.lib) {
-        if (this.lib[i].type == this.libType.js) {
+    for (var i in this.uiResource) {
+        if (this.uiResource[i].type == this.resourceType.js) {
             loadCount++;
-            this.loadResource(this.libPath + this.lib[i].url, this.lib[i].type, function () {
+            this.loadResource(this.uiResource[i].url, this.uiResource[i].type, function () {
                 loadCount--;
                 if (loadCount == 0) {
                     fn();
                 }
             });
         } else {
-            this.loadResource(this.libPath + this.lib[i].url, this.lib[i].type);
+            this.loadResource(this.uiResource[i].url, this.uiResource[i].type);
         }
     }
     return this;
@@ -83,6 +85,7 @@ AdminUI.UI.showStatus = function (item, item2) {
     item.addClass('d-inlink').removeClass('d-none');
     item2.addClass('d-none').removeClass('d-inlink');
 };
+
 AdminUI.UI.windowWidth = function (window_Width, _leftMenu) {
     var _aIcon = $('.account-icon');
     var _aName = $('.account-name');
@@ -138,7 +141,7 @@ AdminUI.UI.iframeNavCloseEvent = function (_this, dClass, dClass2) {
     _this.remove();
     $('.iframe-box .' + dClass).remove();
 };
-AdminUI.init = function (jsonFilePath) {
+AdminUI.buildFrame = function (jsonFilePath) {
     //欢迎页
     document.getElementById('welcomePage').setAttribute('src', this.welcomePage);
     //请求菜单内容
